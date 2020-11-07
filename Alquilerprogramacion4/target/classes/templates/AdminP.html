@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:replace="layouts/NewFile :: head">
+    <title>Perfil Administrador</title>
+</head>
+<body>
+    <header class="encabezado">
+        <div class="img">
+            <img src="img/man.png" height="80" width="80">
+        </div>
+       <h4>Administrador</h4>
+       <div sec:authorize="isAuthenticated()">Bienvenido al sistema. <a href="/logout">Salir del sistema</a> </div>
+        <nav >
+            <ul class="funciones">
+            <li><a  onclick="lista()">Inico</a></li>
+                <li><a onclick="vehiculo()">Agregar vehiculo</a></li>
+                <li><a onclick="admin()">Agregar Administrador</a></li>
+
+            </ul>
+            
+        </nav>
+    </header>
+    <br>
+<script type="text/javascript" 
+src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+function lista(){
+	document.getElementById("divLista").style.display="block";
+	document.getElementById("divAgreV").style.display="none";
+	document.getElementById("divAdmin").style.display="none";
+	document.getElementById("divActu").style.display="none";
+	
+}
+</script>
+
+<script type="text/javascript">
+function vehiculo(){
+	document.getElementById("divAgreV").style.display="block";
+	document.getElementById("divLista").style.display="none";
+	document.getElementById("divAdmin").style.display="none";
+	document.getElementById("divActu").style.display="none";
+}
+</script>
+
+
+<script type="text/javascript">
+function admin(){
+	document.getElementById("divAdmin").style.display="block";
+	document.getElementById("divLista").style.display="none";
+	document.getElementById("divAgreV").style.display="none";
+	document.getElementById("divActu").style.display="none";
+}
+</script>
+<div id="divAdmin" style="display: none">
+<div class="content">
+        <div class="contact-wrapper">
+            <div class="contact-form"> <br>
+                <h3 align="center"> Regristar Administrador</h3>
+                <form action="">
+                    <p>
+                        <label for="fullname">Nombre</label>
+                        <input type="text" name="fullname" id="fullname">
+                    </p>
+                    <p>
+                       <label for="">Contraseña</label> 
+                       <input type="password" name="password">
+                    </p>
+                    <p>
+                        <label for="">Apellido</label>
+                        <input type="text" name="phone">
+                    </p>
+                    <p>
+                        <label for="">Telefono</label>
+                        <input type="tel" name="affair">
+                    </p>
+                    <p>
+                        <label for="">Direccion</label>
+                        <input type="text" name="affair">
+                    </p>
+                    <p class="block">
+                        <button type="submit">Registrar</button>
+                    </p>                  
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="divLista" style="display: block">
+
+    <h2 style="text-align: center;">Vehiculos Disponibles</h2>
+    <table class="table table-dark" th:each="v:${vehiculos}" id="cabeza">
+  <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">año</th>
+            <th scope="col">Costo</th>
+            <th scope="col">marca</th>
+            <th scope="col">matricula</th>
+            <th scope="col">modelo</th>
+            <th scope="col">imagen</th>
+            <th scope="col">acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td th:text="${v.id_vehiculo}"></td>
+            <td th:text="${v.ano}"></td>
+            <td th:text="${v.costoDiario}"></td>
+            <td th:text="${v.marca}"></td>
+            <td  th:text="${v.matricula}"></td>
+            <td  th:text="${v.modelo}"></td>
+            <td><img class="car" th:src="@{'/imagenes/'+${v.imagen}}"></td>
+<td>
+<a th:onclick="edicion([[${v.id_vehiculo}]])" class="btn btn-success">Editar</a>
+<a th:href="@{/BorraVehiculo/}+${v.id_vehiculo}" class="btn btn-danger" >Eliminar</a>
+</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+
+<div id="divAgreV" style="display: none">
+<form  action="/CrearVehiculos" enctype="multipart/form-data" method="post">
+    <div class="registro" align ="center">
+      <marquee behavior="scroll" direction="left">REGISTRAR NUEVO VEHICULO - ALQUILERES_SV</marquee>
+    <div>
+      
+      <input type="number" class="form-control"  placeholder="ID" name="id" hidden="">
+    </div>
+    <div class="form-group">
+      
+      <input type="text" class="form-control"  placeholder="MARCA" name="marca">
+    </div>
+    <div class="form-group">
+       
+        <input type="text" class="form-control"  placeholder="MODELO" name="modelo">
+      </div>
+      <div class="form-group">
+        
+        <input type="text" class="form-control"  placeholder="MATRICULA" name="matricula">
+      </div>
+      <div class="form-group">
+      
+        <input type="text" class="form-control"  placeholder="AÑO" maxlength="4" name="anno">
+      </div>
+      <div class="form-group">
+        
+        <input type="text" class="form-control"  placeholder="COSTO DIARIO" name="costoDiario">
+      </div>
+      <div class="form-group">
+        <input type="file" class="form-control"  placeholder="URL" name="imagen">
+        
+      </div>
+       <button type="submit" class="btn btn-success">Crear Registro</button>
+    </div>
+  </form>
+</div>
+
+<div id="divActu" style="display: none">
+<form  action="/actualizar" method="post"  enctype="multipart/form-data">
+    <div class="registro" align ="center">
+      <marquee behavior="scroll" direction="left">ACTUALIZAR VEHICULO</marquee>
+    <div>
+      
+      <input type="number" class="form-control" id="id_vehiculo" placeholder="ID" name="id" hidden="">
+    </div>
+    <div class="form-group">
+      
+      <input type="text" class="form-control" id="marca" placeholder="MARCA" name="marca">
+    </div>
+    <div class="form-group">
+       
+        <input type="text" class="form-control" id="modelo" placeholder="MODELO" name="modelo">
+      </div>
+      <div class="form-group">
+        
+        <input type="text" class="form-control" id="matricula" placeholder="MATRICULA" name="matricula">
+      </div>
+      <div class="form-group">
+      
+        <input type="text" class="form-control" id="ano" placeholder="AÑO" maxlength="4" name="anno">
+      </div>
+      <div class="form-group">
+        
+        <input type="text" class="form-control" id="costoDiario" placeholder="COSTO DIARIO" name="costoDiario">
+      </div>
+      <div class="form-group">
+        <input type="file" class="form-control" id="imagen" placeholder="URL" name="imagen">
+        
+      </div>
+       <button type="submit" class="btn btn-success">Actualizar Registro</button>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+function edicion(id){
+	document.getElementById("divActu").style.display="block";
+	document.getElementById("divAgreV").style.display="none";
+	document.getElementById("divLista").style.display="none";
+	document.getElementById("divAdmin").style.display="none";
+	$.ajax({
+		url: "/llevar/"+id,
+		success: function(res){
+			console.log(res);
+			$("#id_vehiculo").val(res.id_vehiculo);
+			$("#marca").val(res.marca);
+			$("#modelo").val(res.modelo);
+			$("#matricula").val(res.matricula);
+			$("#costoDiario").val(res.costoDiario);
+			$("#ano").val(res.ano);
+			$("#imagen").val(res.imagen);
+		},
+		error: function(e){console.log(e);}
+	});
+}
+</script>
+</body>
+<footer>
+    <samp>Alquiler Copyright 2020 © </samp>
+</footer>
+</html>

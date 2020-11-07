@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>alquiler</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+</head>
+<body>
+<h1>Datos</h1>
+<div id="vent" class="flotar" 
+style="position: absolute;
+display: block;
+height: 535px;
+width: 360px;
+background: #FFFFFF;
+border-color: rgb(0, 0, 0);
+border:1px solid ;"> 
+<br>
+ <form action="/CrearAlquiler" method="post" modelAttribute="vehi"> 
+<input type="text"  name="fkcl">
+<input type="text" name="fkV" th:value="${vehi.id_vehiculo}" hidden>
+<img th:src="@{'/imagenes/'+${vehi.imagen}}"  style="max-width:90%;max-height:100%;" /><br>
+<label>Marca:</label>
+<input type="text" name="" th:value="${vehi.marca}" disabled="disabled"><br>
+<label>Modelo:</label>
+<input type="text" name="" th:value="${vehi.modelo}" disabled="disabled"><br>
+<label>Matricula:</label>
+<input type="text" name="" th:value="${vehi.matricula}" disabled="disabled"><br>
+<label>Costo Diario:</label>
+<input type="text" th:value="${vehi.costoDiario}"  id="numero1" disabled="disabled" onchange="multiplicacion(this.value);"><br>
+<label>Año del auto:</label>
+<input type="text" name="" th:value="${vehi.ano}" disabled="disabled"><br>
+<label>Fecha de entrega:</label>
+<input type="text" required id="TFecha_inicio" placeholder="dd/mm/aaaa" name="fechaE" ><br>
+<label>Telefono</label>
+<input type="number" required="required" name="telefono" maxlength="8" ><br>
+<label>Galones de Gasolina</label>
+<input type="number" value="0" required="required" max="20" min="0" name="galones"><br>
+<label>Numero de Dias</label>
+<input type="number" value="1" required="required" max="10" min="1" class="item"  onchange="multiplicacion(this.value);" id="TNum_diasAfectar" name="dias" placeholder="Nº de días"><br>
+<label>Color del auto</label>
+<select required="" name="color">
+	<option  style="background: #FD0000;">ROJO</option>
+	<option  style="background: #0BFD00;">VERDE</option>
+	<option  style="background: #000BFC;">AZUL</option>
+	<option  style="background: #FC00F1;">MAGENTA</option>
+	<option  style="background: #FCF800;">AMARILLO</option>
+	<option  style="background: #00E9FC;">CIAN</option>
+	<option  style="background: #FFFFFF;">BLANCO</option>
+	<option  style="background: #000000;">NEGRO</option>
+</select><br>
+<input type="text" id="Resultado"  name="fechaC" hidden=""> 
+<span>El TOTAL ES:
+<input type="text" id="Total" name="total"  value="0" hidden th:value="${vehi.costoDiario}">
+</span> <input type="text" id="Total2" disabled value="0" th:value="${vehi.costoDiario}"><span>$</span><br>
+
+<div id="divbotones" hidden="">
+<button onclick="multiplicacion()"  id="Calcular2">alquilar</button>
+</div>
+
+</form>
+
+</div>
+<script>
+function multiplicacion(valor) {
+	$("#divbotones").removeAttr("hidden");
+   var numero1 = Number($("#numero1").val());
+   var numero2 = Number($("#TNum_diasAfectar").val());
+   var sumar = numero1 * numero2;
+   var resultado = $("#Total").val(sumar);
+   var resultado = $("#Total2").val(sumar);
+}
+</script>
+<script type="text/javascript">
+	window.onload = function(){
+  var fecha = new Date(); //Fecha actual
+  var mes = fecha.getMonth()+1; //obteniendo mes
+  var dia = fecha.getDate(); //obteniendo dia
+  var ano = fecha.getFullYear(); //obteniendo año
+  if(dia<10)
+    dia='0'+dia; //agrega cero si el menor de 10
+  if(mes<10)
+    mes='0'+mes //agrega cero si el menor de 10
+  document.getElementById('TFecha_inicio').value=dia+"/"+mes+"/"+ano;
+}
+</script>
+<script type="text/javascript">
+	function FCalculo_termino(){       
+    var fecha_inicio = $('#TFecha_inicio').val();
+    var dias = $('#TNum_diasAfectar').val();
+    var dateparts = fecha_inicio.split('/').map(d => parseInt(d));
+    if (dateparts.length !== 3 || !dateparts.every(d => !isNaN(d))){
+    	 var resultado = $("#Resultado").val('');
+        var resultado = $("#Resultado1").val('');
+      return;
+    }
+    var fechaDate = new Date(dateparts[2], dateparts[1]-1, dateparts[0]);
+    
+    var diasNum = parseInt(dias);
+    if (isNaN(diasNum)){
+    	 $('#Resultado').text('');
+      $('#Resultado1').text('');
+    }
+    
+    fechaDate.setDate(fechaDate.getDate() + diasNum);
+    var resultado = $("#Resultado").val(fechaDate.toLocaleDateString());
+    var resultado = $("#Resultado1").val(fechaDate.toLocaleDateString());
+
+}
+	$(function(){
+		  $('#Calcular').click(FCalculo_termino);
+
+		});
+	
+$(function(){
+ $("#Calcular2").click(FCalculo_termino);
+ 
+});
+</script>
+</body>
+</html>

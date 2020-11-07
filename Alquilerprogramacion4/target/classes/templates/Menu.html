@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/NewFile :: head">
+<meta charset="UTF-8">
+<title>Index</title>
+
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+Bienvenido al sistema. <a href="/logout">Salir del sistema</a> <br>
+<a href="/Admin">admin</a> 
+</div>
+
+
+<div class="product" th:each="v:${vehiculos}">
+<div class="datcar">
+<h1 style="float: left; margin-left: 30px; margin-top: 42px;">MARCA:</h1>
+<h1 style="float: right; margin-right: 30px;  margin-top: 42px;"th:text="${v.marca}"></h1>
+<h1 style="float: left; margin-left: 34px;">AÑO:</h1>
+<h1 style="float: right; margin-right: 50px;" th:text="${v.ano}"></h1>
+<h1 style="float: left; margin-left: 34px;">Modelo:</h1>
+<h1 style="float: right; margin-right: 42px;" th:text="${v.modelo}"></h1>
+</div>
+
+<div class="imgcar">
+<img th:src="@{'/imagenes/'+${v.imagen}}"  class="car">
+</div>
+
+
+<div class="precio">
+<ul class="linea2"></ul>
+</div>
+<h1 class="dd">
+<label th:text="${v.costoDiario}"></label>
+<label>$C/D</label>
+</h1>
+<a th:href="@{/llevardatos/}+${v.id_vehiculo}" ><div class="btnalq">Ver Oferta</div></a>
+</div>
+</body>
+</html>
