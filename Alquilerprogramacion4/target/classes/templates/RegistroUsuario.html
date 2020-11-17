@@ -13,40 +13,40 @@
                 <form action="/CrearRegistro" method="post">
                     <p>
                         <label for="fullname">Primer Nombre</label>
-                        <input type="text" name="Pnombre">
+                        <input type="text" name="Pnombre" required placeholder="ESCRIBA SU PRIMER NOMRE">
                     </p>
                     <p>
                         <label for="fullname">Segundo Nombre</label>
-                        <input type="text" name="Snombre">
+                        <input type="text" name="Snombre" required placeholder="ESCRIBA SU SEGUNDO NOMBRE">
                     </p>
                     <p>
                         <label for="">Primer Apellido</label>
-                        <input type="text" name="Papellido">
+                        <input type="text" name="Papellido" required placeholder="ESCRIBA SU PRIMER APELLIDO">
                     </p>
                     
                     <p>
                         <label for="">Segundo Apellido</label>
-                        <input type="text" name="Sapellido">
+                        <input type="text" name="Sapellido" required placeholder="ESCRIBA SU SEGUNDO APELLIDO"> 
                     </p>
                     <p>
                         <label for="">Correo</label>
-                        <input type="email" name="correo">
+                        <input type="email" name="correo" required placeholder="ESCRIBA SU CORREO ElECTRONICO">
                     </p>
                     <p>
                        <label for="">Contraseña</label> 
-                       <input type="password" name="password">
+                       <input type="password" name="password" required placeholder="ESCRIBA LA CONTRASEÑA SIN SINGNOS: $,@,#,%" maxlength="100" min="4" max="100">
                     </p>
                     <p>
                         <label for="">Dui</label>
-                       <input type="number" name="dui">
+                       <input type="number" name="dui" required placeholder="ESCRIBA SU DUI SIN GUION" maxlength="9" onKeyPress="if(this.value.length==9) return false;" min="9">
                     </p>
                     <p>
                         <label for="">Direccion</label>
-                        <input type="text" name="dire">
+                        <input type="text" name="dire" required placeholder="ESCRIBA SU DIRECION">
                     </p>
                       <p>
                         <label for="">Licencia</label>
-                       <input type="number" name="licencia">
+                       <input type="number" name="licencia" required placeholder="ESCRIBA SU Licencia SIN GUION" maxlength="14" onKeyPress="if(this.value.length==14) return false;" min="14">
                     </p>
                     <p class="block">
                          <button type="submit" class="btn btn-success">Crear Registro</button>
