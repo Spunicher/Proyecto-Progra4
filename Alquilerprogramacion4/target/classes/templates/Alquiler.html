@@ -3,7 +3,6 @@
 <meta charset="utf-8">
 <title>alquiler</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
 </head>
 <body>
 <h1>Datos</h1>
@@ -17,25 +16,31 @@ border-color: rgb(0, 0, 0);
 border:1px solid ;"> 
 <br>
  <form action="/CrearAlquiler" method="post" modelAttribute="vehi"> 
-<input type="text"  name="fkcl">
+<input type="hidden" name="fkcl" required="required" th:value="${vehi2}">
 <input type="text" name="fkV" th:value="${vehi.id_vehiculo}" hidden>
 <img th:src="@{'/imagenes/'+${vehi.imagen}}"  style="max-width:90%;max-height:100%;" /><br>
+<input type="text" th:value="${vehi.imagen}" name="img" hidden>
 <label>Marca:</label>
-<input type="text" name="" th:value="${vehi.marca}" disabled="disabled"><br>
+<input type="text" name="marca" th:value="${vehi.marca}" hidden="" required>
+<input type="text" name="marca" th:value="${vehi.marca}" disabled="disabled" required><br>
 <label>Modelo:</label>
-<input type="text" name="" th:value="${vehi.modelo}" disabled="disabled"><br>
+<input type="text" name="modelo" th:value="${vehi.modelo}" hidden="" required>
+<input type="text" name="modelo" th:value="${vehi.modelo}" disabled="disabled" required><br>
 <label>Matricula:</label>
-<input type="text" name="" th:value="${vehi.matricula}" disabled="disabled"><br>
+<input type="text" name="matri" th:value="${vehi.matricula}" hidden="" required>
+<input type="text" name="matri" th:value="${vehi.matricula}" disabled="disabled" required><br>
 <label>Costo Diario:</label>
-<input type="text" th:value="${vehi.costoDiario}"  id="numero1" disabled="disabled" onchange="multiplicacion(this.value);"><br>
+<input type="text" name="cost" th:value="${vehi.costoDiario}" required hidden="">
+<input type="text" name="cost" th:value="${vehi.costoDiario}" required id="numero1" disabled="disabled" onchange="multiplicacion(this.value);"><br>
 <label>Año del auto:</label>
-<input type="text" name="" th:value="${vehi.ano}" disabled="disabled"><br>
+<input type="text" name="ano" th:value="${vehi.ano}" hidden="" required>
+<input type="text" name="ano" th:value="${vehi.ano}" disabled="disabled" required><br>
 <label>Fecha de entrega:</label>
 <input type="text" required id="TFecha_inicio" placeholder="dd/mm/aaaa" name="fechaE" ><br>
 <label>Telefono</label>
 <input type="number" required="required" name="telefono" maxlength="8" ><br>
 <label>Galones de Gasolina</label>
-<input type="number" value="0" required="required" max="20" min="0" name="galones"><br>
+<input type="number" value="0" required="required" max="20" min="0" name="galones" ><br>
 <label>Numero de Dias</label>
 <input type="number" value="1" required="required" max="10" min="1" class="item"  onchange="multiplicacion(this.value);" id="TNum_diasAfectar" name="dias" placeholder="Nº de días"><br>
 <label>Color del auto</label>
@@ -49,14 +54,14 @@ border:1px solid ;">
 	<option  style="background: #FFFFFF;">BLANCO</option>
 	<option  style="background: #000000;">NEGRO</option>
 </select><br>
-<input type="text" id="Resultado"  name="fechaC" hidden=""> 
+<input type="text" id="Resultado"  name="fechaC" hidden="" required> 
 <span>El TOTAL ES:
-<input type="text" id="Total" name="total"  value="0" hidden th:value="${vehi.costoDiario}">
-</span> <input type="text" id="Total2" disabled value="0" th:value="${vehi.costoDiario}"><span>$</span><br>
+<input type="text" id="Total" name="total"  value="0" hidden th:value="${vehi.costoDiario}" required>
+</span> <input type="text" id="Total2" disabled value="0" th:value="${vehi.costoDiario}" required><span>$</span><br>
 
-<div id="divbotones" hidden="">
+
 <button onclick="multiplicacion()"  id="Calcular2">alquilar</button>
-</div>
+
 
 </form>
 

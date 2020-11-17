@@ -59,6 +59,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter implement
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		WebMvcConfigurer.super.addResourceHandlers(registry);
-     registry.addResourceHandler("/imagenes/**").addResourceLocations("file:/C:/Users/jonat/Desktop/imagenes/");
+     registry.addResourceHandler("/imagenes/**").addResourceLocations("file:/C:/imagenes/");
 	}
 }

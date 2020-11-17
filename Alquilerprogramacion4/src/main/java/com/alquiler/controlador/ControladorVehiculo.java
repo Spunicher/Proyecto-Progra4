@@ -46,13 +46,14 @@ public class ControladorVehiculo {
 			   @RequestParam(value = "anno")String anno)throws ParseException  {
 		   vehiculo h = new vehiculo();
 		   if (!imagen.isEmpty() ) {
-			   String ruta = "C:\\Users\\jonat\\Desktop\\imagenes";
+			   String ruta = "C:\\imagenes";
 					  try {
 						byte[] bytes = imagen.getBytes();
 						Path rutaabsoluta = Paths.get(ruta + "//" + imagen.getOriginalFilename());
 						Files.write(rutaabsoluta, bytes);
-					h.setImagen(imagen.getOriginalFilename());
-					 h.setMarca(marca);
+					    h.setImagen(imagen.getOriginalFilename());
+					    h.setEstado(1);
+					    h.setMarca(marca);
 					   h.setModelo(modelo);
 					   h.setMatricula(matricula);
 					   h.setCostoDiario(Double.parseDouble(costoDiario));
@@ -81,18 +82,20 @@ public class ControladorVehiculo {
 		
 		//editar
 @RequestMapping(value = "/actualizar", method = RequestMethod.POST)
-public String crear(@RequestParam(value = "id")int id,@RequestParam(value = "marca")String marca,
+public String crear(@RequestParam(value = "id")int id,
+@RequestParam(value = "estado")int estado,
+@RequestParam(value = "marca")String marca,
 @RequestParam(value = "modelo")String modelo,@RequestParam(value = "matricula")String matricula,
 @RequestParam(value = "imagen")MultipartFile imagen,@RequestParam(value = "costoDiario")Double costoDiario,
 @RequestParam(value = "anno")String anno)throws ParseException  {
 			   vehiculo h = new vehiculo();
-			   String ruta = "C:\\Users\\jonat\\Desktop\\imagenes";
+			   String ruta = "C:\\imagenes";
 			   try {
 				   byte[] bytes = imagen.getBytes();
 					Path rutaabsoluta = Paths.get(ruta + "//" + imagen.getOriginalFilename());
 					Files.write(rutaabsoluta, bytes);
 					h.setId_vehiculo(id);
-					   
+					h.setEstado(estado);
 					   h.setMarca(marca);
 					   h.setModelo(modelo);
 					   h.setMatricula(matricula);

@@ -31,13 +31,16 @@ import com.sun.el.parser.ParseException;
 
 @Controller
 public class LoginControler {
-
 	@Autowired
 	UsuarioRepo repoU;
 	@Autowired
 	RolRepo repoR;
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	
+	
+	
+	
 	@RequestMapping("/login")
 	public String login(@RequestParam(value="error",required = false) 
 	String error,@RequestParam(value="logout",required = false) 
@@ -95,10 +98,10 @@ public class LoginControler {
 		      String bcrypt = passwordEncoder.encode(password);
 		      l.setClave(bcrypt);	      
 		      
-          //    Rol r = new Rol();    
-		    //  List<Rol> rol = new ArrayList<>();
-		    //  rol.add(r);
-		     // l.setRoles(rol);
+             //Rol r = new Rol();    
+		      //List<Rol> rol = new ArrayList<>();
+		      //rol.add(r);
+		      //l.setRoles(rol);
 		      
 		      repoU.save(l);
 		      

@@ -130,6 +130,21 @@ public class Usuario {
 		this.fkCliente = fkCliente;
 	}
 
+	
+
+	public Usuario(String nick, String clave, String correo, String apellido, String dui, String licencia,
+			String direcion, List<alquiler> fkCliente, List<Rol> roles) {
+		this.nick = nick;
+		this.clave = clave;
+		this.correo = correo;
+		this.apellido = apellido;
+		this.dui = dui;
+		this.licencia = licencia;
+		this.direcion = direcion;
+		this.fkCliente = fkCliente;
+		this.roles = roles;
+	}
+
 	public Usuario(int id, String nick, String clave, String correo, String apellido, String dui, String licencia,
 			String direcion) {
 		this.id = id;
@@ -142,7 +157,6 @@ public class Usuario {
 		this.direcion = direcion;
 	}
 
-	
 	public Usuario(String nick, String clave, String correo, String apellido, String dui, String licencia,
 			String direcion) {
 		this.nick = nick;
@@ -153,7 +167,7 @@ public class Usuario {
 		this.licencia = licencia;
 		this.direcion = direcion;
 	}
-
+	
 	public Usuario() {
 	}
 	

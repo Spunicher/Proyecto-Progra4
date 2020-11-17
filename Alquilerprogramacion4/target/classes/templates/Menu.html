@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/Alquilerprogramacion4/src/main/resources/static/css/stilo1.css">
 <head th:replace="layouts/NewFile :: head">
 <meta charset="UTF-8">
 <title>Index</title>
@@ -9,12 +10,25 @@
 </head>
 <body>
 <div sec:authorize="isAuthenticated()">
-Bienvenido al sistema. <a href="/logout">Salir del sistema</a> <br>
-<a href="/Admin">admin</a> 
+<header class="encabezado">
+    <div>
+        <img src="/img/imagen1.png" alt="">
+    </div>
+    <h4 style="text-align: center;">Bienvenido</h4>
+    <nav>
+        <ul class="funciones">
+        <li><a href="/Admin">Entrar como administrador</a></li>
+        <li><a href="#">¿Quines somos?</a></li>
+        <li><a href="/Vista">Mis Alquileres</a></li>
+        <li><a href="/logout">Salir del sistema</a> </li>    
+        </ul>
+    </nav>
+
+</header>
 </div>
 
 
-<div class="product" th:each="v:${vehiculos}">
+<div class="product" th:each="v:${vehiculos}" th:if="${v.estado==1}">
 <div class="datcar">
 <h1 style="float: left; margin-left: 30px; margin-top: 42px;">MARCA:</h1>
 <h1 style="float: right; margin-right: 30px;  margin-top: 42px;"th:text="${v.marca}"></h1>
@@ -38,5 +52,6 @@ Bienvenido al sistema. <a href="/logout">Salir del sistema</a> <br>
 </h1>
 <a th:href="@{/llevardatos/}+${v.id_vehiculo}" ><div class="btnalq">Ver Oferta</div></a>
 </div>
+
 </body>
 </html>

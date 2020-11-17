@@ -2,21 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <head th:replace="layouts/NewFile :: head">
+  <link rel="stylesheet" href="/Alquilerprogramacion4/src/main/resources/static/css/stilo1.css">
+
     <title>Perfil Administrador</title>
 </head>
 <body>
     <header class="encabezado">
         <div class="img">
-            <img src="img/man.png" height="80" width="80">
+            <img src="/img/man.png" height="80" width="80">
         </div>
        <h4>Administrador</h4>
-       <div sec:authorize="isAuthenticated()">Bienvenido al sistema. <a href="/logout">Salir del sistema</a> </div>
+       <div sec:authorize="isAuthenticated()"></div>
         <nav >
             <ul class="funciones">
             <li><a  onclick="lista()">Inico</a></li>
                 <li><a onclick="vehiculo()">Agregar vehiculo</a></li>
                 <li><a onclick="admin()">Agregar Administrador</a></li>
-
+              <li><a href="/menu">Salir del sistema</a></li>
             </ul>
             
         </nav>
@@ -53,49 +55,57 @@ function admin(){
 }
 </script>
 <div id="divAdmin" style="display: none">
-<div class="content">
         <div class="contact-wrapper">
             <div class="contact-form"> <br>
-                <h3 align="center"> Regristar Administrador</h3>
-                <form action="">
+                <h3 align="center"> Regristar Admin</h3>
+                <form action="" method="post">
                     <p>
                         <label for="fullname">Nombre</label>
-                        <input type="text" name="fullname" id="fullname">
+                        <input type="text" name="nombre" required>
+                    </p>
+                    
+                    <p>
+                        <label for="">Apellido</label>
+                        <input type="text" name="apellido" required>
+                    </p>
+                    <p>
+                        <label for="">Correo</label>
+                        <input type="email" name="correo" required>
                     </p>
                     <p>
                        <label for="">Contraseña</label> 
-                       <input type="password" name="password">
+                       <input type="password" name="password" required>
                     </p>
                     <p>
-                        <label for="">Apellido</label>
-                        <input type="text" name="phone">
-                    </p>
-                    <p>
-                        <label for="">Telefono</label>
-                        <input type="tel" name="affair">
+                        <label for="">Dui</label>
+                       <input type="number" name="dui" required>
                     </p>
                     <p>
                         <label for="">Direccion</label>
-                        <input type="text" name="affair">
+                        <input type="text" name="dire" required>
+                    </p>
+                      <p>
+                        <label for="">Licencia</label>
+                       <input type="number" name="licencia" required>
                     </p>
                     <p class="block">
-                        <button type="submit">Registrar</button>
+                         <button type="submit" class="btn btn-success">Crear Registro</button>
                     </p>                  
                 </form>
             </div>
         </div>
-    </div>
 </div>
 
 <div id="divLista" style="display: block">
 
     <h2 style="text-align: center;">Vehiculos Disponibles</h2>
-    <table class="table table-dark" th:each="v:${vehiculos}" id="cabeza">
+    <table class="table table-dark"  id="cabeza">
   <thead class="thead-dark">
           <tr>
             <th scope="col">#</th>
             <th scope="col">año</th>
             <th scope="col">Costo</th>
+            <th scope="col">Estado</th>
             <th scope="col">marca</th>
             <th scope="col">matricula</th>
             <th scope="col">modelo</th>
@@ -104,10 +114,11 @@ function admin(){
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr th:each="v:${vehiculos}">
             <td th:text="${v.id_vehiculo}"></td>
             <td th:text="${v.ano}"></td>
             <td th:text="${v.costoDiario}"></td>
+             <td th:text="${v.estado}"></td>
             <td th:text="${v.marca}"></td>
             <td  th:text="${v.matricula}"></td>
             <td  th:text="${v.modelo}"></td>
@@ -163,34 +174,42 @@ function admin(){
 <form  action="/actualizar" method="post"  enctype="multipart/form-data">
     <div class="registro" align ="center">
       <marquee behavior="scroll" direction="left">ACTUALIZAR VEHICULO</marquee>
-    <div>
       
+    <div>
       <input type="number" class="form-control" id="id_vehiculo" placeholder="ID" name="id" hidden="">
     </div>
+    
     <div class="form-group">
-      
       <input type="text" class="form-control" id="marca" placeholder="MARCA" name="marca">
     </div>
+    
     <div class="form-group">
-       
         <input type="text" class="form-control" id="modelo" placeholder="MODELO" name="modelo">
       </div>
+      
       <div class="form-group">
-        
         <input type="text" class="form-control" id="matricula" placeholder="MATRICULA" name="matricula">
       </div>
-      <div class="form-group">
       
+      <div class="form-group">
         <input type="text" class="form-control" id="ano" placeholder="AÑO" maxlength="4" name="anno">
       </div>
+      
       <div class="form-group">
-        
         <input type="text" class="form-control" id="costoDiario" placeholder="COSTO DIARIO" name="costoDiario">
       </div>
+      
+      <div class="form-group">
+       <select class="comb" name="estado" id="estado">
+      <option value="1">Activo</option>
+      <option value="2">Desativado</option>
+       </select>
+      </div>
+      
       <div class="form-group">
         <input type="file" class="form-control" id="imagen" placeholder="URL" name="imagen">
-        
       </div>
+      
        <button type="submit" class="btn btn-success">Actualizar Registro</button>
     </div>
   </form>
@@ -212,6 +231,7 @@ function edicion(id){
 			$("#matricula").val(res.matricula);
 			$("#costoDiario").val(res.costoDiario);
 			$("#ano").val(res.ano);
+			$("#estado").val(res.estado);
 			$("#imagen").val(res.imagen);
 		},
 		error: function(e){console.log(e);}

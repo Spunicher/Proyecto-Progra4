@@ -1,16 +1,16 @@
 package com.alquiler.controlador;
+import java.security.Principal;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alquiler.entidades.alquiler;
+import com.alquiler.entidades.vehiculo;
 import com.alquiler.proyecto.interfaces.IAlquiler;
 import com.alquiler.proyecto.interfaces.IVehiculo;
 import com.alquiler.proyecto.interfaces.UsuarioRepo;
@@ -23,10 +23,23 @@ public class controladorAlquiler {
 	IVehiculo repoV;
 	@Autowired
 	UsuarioRepo repoU;
-    
-	   
-	   @RequestMapping(value = "/CrearAlquiler", method = RequestMethod.POST)
+	
+  @GetMapping("/Vista")
+  public String vista(Model modelo, Principal principal) {
+	modelo.addAttribute("inner", repoA.findAll());
+	modelo.addAttribute("user", repoU.findByNick(principal.getName()).getId());
+	return "vista";  
+  }
+  
+ @RequestMapping(value = "/CrearAlquiler", method = RequestMethod.POST)
 	   public String crearvehiculo(
+			   @RequestParam(value = "marca")String marca,
+			   @RequestParam(value = "modelo")String modelo,
+			   @RequestParam(value = "matri")String matri,
+			   @RequestParam(value = "cost")String cost,
+			   @RequestParam(value = "ano")String ano,
+			   @RequestParam(value = "img")String img,
+			   
 			   @RequestParam(value = "color")String color,
 			   @RequestParam(value = "fechaE")String fechaE,
 			   @RequestParam(value = "fechaC")String fechaC,
@@ -49,8 +62,18 @@ public class controladorAlquiler {
 	a.setNumero_dias(dias);
 	a.setTelefono(telefono);
 	a.setTotal(total);
-		
-		  repoA.save(a);
+    repoA.save(a);
+		  
+		  vehiculo h = new vehiculo();
+		  h.setId_vehiculo(fkV);
+			h.setEstado(2);
+			   h.setMarca(marca);
+			   h.setModelo(modelo);
+			   h.setMatricula(matri);
+			   h.setCostoDiario(Double.parseDouble(cost));
+			   h.setAno(ano);
+			   h.setImagen(img);
+			   repoV.save(h);
 			   return "redirect:/menu";
 		}
 	   

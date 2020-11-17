@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
-
+<head th:replace="layouts/NewFile :: head">
 <title>Regristro Usuario</title>
 </head>
 <body>
@@ -22,7 +22,7 @@
                     </p>
                     <p>
                         <label for="">Correo</label>
-                        <input type="text" name="correo">
+                        <input type="email" name="correo">
                     </p>
                     <p>
                        <label for="">Contraseña</label> 
@@ -30,7 +30,7 @@
                     </p>
                     <p>
                         <label for="">Dui</label>
-                       <input type="text" name="dui">
+                       <input type="number" name="dui">
                     </p>
                     <p>
                         <label for="">Direccion</label>
@@ -38,7 +38,7 @@
                     </p>
                       <p>
                         <label for="">Licencia</label>
-                       <input type="text" name="licencia">
+                       <input type="number" name="licencia">
                     </p>
                     <p class="block">
                          <button type="submit" class="btn btn-success">Crear Registro</button>
