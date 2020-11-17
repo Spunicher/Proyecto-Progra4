@@ -2,13 +2,13 @@ package com.alquiler.controlador;
 
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,13 +17,10 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.alquiler.entidades.Rol;
 import com.alquiler.entidades.Usuario;
 import com.alquiler.proyecto.interfaces.RolRepo;
 import com.alquiler.proyecto.interfaces.UsuarioRepo;
@@ -79,39 +76,36 @@ public class LoginControler {
 
 	 @RequestMapping(value="/CrearRegistro", method = RequestMethod.POST)
 	   public String crear(
-			   @RequestParam(value = "nombre")String nombre,
-			   @RequestParam(value = "apellido")String apellido,
+			   @RequestParam(value = "Pnombre")String Pnombre,
+			   @RequestParam(value = "Snombre")String Snombre,
+			   @RequestParam(value = "Papellido")String Papellido,
+			   @RequestParam(value = "Sapellido")String Sapellido,
 			   @RequestParam(value = "correo")String correo,
 			   @RequestParam(value = "password")String password,
 			   @RequestParam(value = "dui")String dui,
 			   @RequestParam(value = "dire")String dire,
-			   @RequestParam(value = "licencia")String licencia)throws ParseException  {
+			   @RequestParam(value = "licencia")String licencia,HttpServletResponse response)throws ParseException, IOException  {
 		 
 	      try {
 	    	  Usuario l = new Usuario();
-			  l.setNick(nombre);
-		      l.setApellido(apellido);
-		      l.setCorreo(correo);
+		      l.setPriNombre(Pnombre);
+		      l.setSeguNombre(Snombre);
+		      l.setPrinApellido(Papellido);
+		      l.setSegunApellido(Sapellido);
+		      l.setNick(correo);
 		      l.setDirecion(dire);
 		      l.setDui(dui);
 		      l.setLicencia(licencia);
 		      String bcrypt = passwordEncoder.encode(password);
 		      l.setClave(bcrypt);	      
 		      
-             //Rol r = new Rol();    
-		      //List<Rol> rol = new ArrayList<>();
-		      //rol.add(r);
-		      //l.setRoles(rol);
-		      
 		      repoU.save(l);
-		      
-		      
-		      
 		      return "redirect:/login";
+		      
 		} catch (Exception e) {
-			 return "eorr" + e;
+			System.out.println("Error en campos" + e);
+			return "redirect:/login";
 		}
-	      
-	     
+		   
 		}
 }

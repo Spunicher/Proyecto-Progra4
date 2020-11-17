@@ -50,9 +50,11 @@ public class Alquilerprogramacion4Application implements CommandLineRunner{
 		repoR.save(r2);
 		
 	Usuario l = new Usuario();
-		 l.setNick("admin");
-	     l.setApellido("admin");
-	     l.setCorreo("admin@gmail.com");
+	     l.setPriNombre("NOMBRE1");
+	     l.setSeguNombre("NOMBRE2");
+	     l.setPrinApellido("APELLIDO1");
+	     l.setSegunApellido("APELLIDO2");
+	     l.setNick("admin@gmail.com");
 	     l.setDirecion("Mi casa");
 	     l.setDui("12345678");
 	     l.setLicencia("876543");

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,10 +24,13 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
-	String nick;
+	@Column(unique=true)
+	String nick; //correo
 	String clave;
-	private String correo;
-	private String apellido;
+	private String PriNombre;
+	private String SeguNombre;
+	private String PrinApellido;
+	private String SegunApellido;
 	private String dui;
 	private String licencia;
 	private String direcion;
@@ -48,8 +52,7 @@ public class Usuario {
 		
 		
 		//************************************************************
-	
-	
+
 	public int getId() {
 		return id;
 	}
@@ -74,28 +77,36 @@ public class Usuario {
 		this.clave = clave;
 	}
 
-	public List<Rol> getRoles() {
-		return roles;
+	public String getPriNombre() {
+		return PriNombre;
 	}
 
-	public void setRoles(List<Rol> roles) {
-		this.roles = roles;
+	public void setPriNombre(String priNombre) {
+		PriNombre = priNombre;
 	}
 
-	public String getCorreo() {
-		return correo;
+	public String getSeguNombre() {
+		return SeguNombre;
 	}
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
+	public void setSeguNombre(String seguNombre) {
+		SeguNombre = seguNombre;
 	}
 
-	public String getApellido() {
-		return apellido;
+	public String getPrinApellido() {
+		return PrinApellido;
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setPrinApellido(String prinApellido) {
+		PrinApellido = prinApellido;
+	}
+
+	public String getSegunApellido() {
+		return SegunApellido;
+	}
+
+	public void setSegunApellido(String segunApellido) {
+		SegunApellido = segunApellido;
 	}
 
 	public String getDui() {
@@ -130,44 +141,60 @@ public class Usuario {
 		this.fkCliente = fkCliente;
 	}
 
-	
+	public List<Rol> getRoles() {
+		return roles;
+	}
 
-	public Usuario(String nick, String clave, String correo, String apellido, String dui, String licencia,
-			String direcion, List<alquiler> fkCliente, List<Rol> roles) {
-		this.nick = nick;
-		this.clave = clave;
-		this.correo = correo;
-		this.apellido = apellido;
-		this.dui = dui;
-		this.licencia = licencia;
-		this.direcion = direcion;
-		this.fkCliente = fkCliente;
+	public void setRoles(List<Rol> roles) {
 		this.roles = roles;
 	}
 
-	public Usuario(int id, String nick, String clave, String correo, String apellido, String dui, String licencia,
-			String direcion) {
+
+	
+	public Usuario(int id, String nick, String clave, String priNombre, String seguNombre, String prinApellido,
+			String segunApellido, String dui, String licencia, String direcion,
+			List<Rol> roles) {
 		this.id = id;
 		this.nick = nick;
 		this.clave = clave;
-		this.correo = correo;
-		this.apellido = apellido;
+		PriNombre = priNombre;
+		SeguNombre = seguNombre;
+		PrinApellido = prinApellido;
+		SegunApellido = segunApellido;
+		this.dui = dui;
+		this.licencia = licencia;
+		this.direcion = direcion;
+		this.roles = roles;
+	}
+	
+	public Usuario( String nick, String clave, String priNombre, String seguNombre, String prinApellido,
+			String segunApellido, String dui, String licencia, String direcion,
+			List<Rol> roles) {
+		this.nick = nick;
+		this.clave = clave;
+		PriNombre = priNombre;
+		SeguNombre = seguNombre;
+		PrinApellido = prinApellido;
+		SegunApellido = segunApellido;
+		this.dui = dui;
+		this.licencia = licencia;
+		this.direcion = direcion;
+		this.roles = roles;
+	}
+	
+	public Usuario( String nick, String clave, String priNombre, String seguNombre, String prinApellido,
+			String segunApellido, String dui, String licencia, String direcion) {
+		this.nick = nick;
+		this.clave = clave;
+		PriNombre = priNombre;
+		SeguNombre = seguNombre;
+		PrinApellido = prinApellido;
+		SegunApellido = segunApellido;
 		this.dui = dui;
 		this.licencia = licencia;
 		this.direcion = direcion;
 	}
 
-	public Usuario(String nick, String clave, String correo, String apellido, String dui, String licencia,
-			String direcion) {
-		this.nick = nick;
-		this.clave = clave;
-		this.correo = correo;
-		this.apellido = apellido;
-		this.dui = dui;
-		this.licencia = licencia;
-		this.direcion = direcion;
-	}
-	
 	public Usuario() {
 	}
 	
