@@ -8,19 +8,19 @@
 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
+<body class="prueba">
 <div sec:authorize="isAuthenticated()">
 <header class="encabezado">
     <div>
         <img src="/img/imagen1.png" alt="">
     </div>
-    <h4 style="text-align: center;" >Bienvenido </h4>
+    <h4 style="text-align: center; color: black;" ><strong>Bienvenido</strong> </h4>
     <nav>
         <ul class="funciones">
-        <li><a href="/Admin">Entrar como administrador</a></li>
-        <li><a href="#">¿Quines somos?</a></li>
-        <li><a href="/Vista">Mis Alquileres</a></li>
-        <li><a href="/logout">Salir del sistema</a> </li>    
+        <li><a href="/Admin"><strong>Entrar como administrador</strong></a></li>
+        <li><a href="#"><strong>¿Quines somos?</strong></a></li>
+        <li><a href="/Vista"><strong>Mis Alquileres</strong></a></li>
+        <li><a href="/logout"><strong>Salir del sistema</strong></a> </li>    
         </ul>
     </nav>
 
@@ -34,7 +34,7 @@
 <h1 style="float: right; margin-right: 30px;  margin-top: 42px;"th:text="${v.marca}"></h1>
 <h1 style="float: left; margin-left: 34px;">AÑO:</h1>
 <h1 style="float: right; margin-right: 50px;" th:text="${v.ano}"></h1>
-<h1 style="float: left; margin-left: 34px;">Modelo:</h1>
+<h1 style="float: left; margin-left: 34px; position:relative;">Modelo:</h1>
 <h1 style="float: right; margin-right: 42px;" th:text="${v.modelo}"></h1>
 </div>
 
@@ -50,7 +50,7 @@
 <label th:text="${v.costoDiario}"></label>
 <label>$C/D</label>
 </h1>
-<a th:href="@{/llevardatos/}+${v.id_vehiculo}" ><div class="btnalq">Ver Oferta</div></a>
+<a th:href="@{/llevardatos/}+${v.id_vehiculo}" ><div class="btnalq" style="color: black;"><strong>Ver Oferta</strong></div></a>
 </div>
 
 </body>

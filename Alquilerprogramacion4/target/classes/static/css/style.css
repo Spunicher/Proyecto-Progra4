@@ -2,6 +2,10 @@
 body{
 	background-color: #F1F0F0;
 }
+
+.prueba{
+	background-color: #d1cdcd;
+}
 .ubic{ 
 	
 	position:absolute;
@@ -71,7 +75,7 @@ svg{
 	border-radius:5px;
 	margin-left:140px;
 	background-color: white;
-	width: 460px;
+	width: 500px;
 	height: 240px;
 }
 .Bpn{
@@ -116,7 +120,7 @@ svg{
 	margin-right:6px;
 	margin-top:5px;
 	float: right;
-	background-color: #FF6106;
+	background-color: #e0ad21;
 	width: 120px;
 	height: 30px;
 }
@@ -171,10 +175,12 @@ svg{
  	position: absolute;
  	background-color: #F6F3F3;
  	width: 300px;
- 	height: 120px;
+	 height: 120px;
+	 position: absolute;
  	margin-left: 540px;
  	margin-top: 200px;
- 	display: none;
+	 display: none;
+	 
  }
  .btn-info{
  	margin-left: 100px;
@@ -193,7 +199,7 @@ float: left;
  .datcar{
  width:220px;
  height:170px;
- background-color: white;
+ background-color:white;
  float:left;
  }
  .imgcar{
@@ -202,7 +208,18 @@ float: left;
  height:160px;
  float: right;
  }
- 
+.flotar{
+	position: absolute;
+	display: block;
+	margin-top: 50px;
+	max-width: 400px;
+	padding: 10px;
+	background: #FFFFFF;
+	margin-left: 38%;
+	border-color: rgb(0, 0, 0);
+	border-radius:15px ;	
+}
+
 @media only screen and (max-width:620px) {
   /* Adecuarlo a telefonos */
   .menu, .main, .right {

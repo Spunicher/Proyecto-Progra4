@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
 <title>alquiler</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/stilo1.css">
 </head>
-<body>
-<h1>Datos</h1>
+<body class="prueba">
+<header>
+
+
+  
+</header>
 <div id="vent" class="flotar" 
-style="position: absolute;
-display: block;
-height: 535px;
-width: 360px;
-background: #FFFFFF;
-border-color: rgb(0, 0, 0);
-border:1px solid ;"> 
+ 
+
 <br>
  <form action="/CrearAlquiler" method="post" modelAttribute="vehi"> 
 <input type="hidden" name="fkcl" required="required" th:value="${vehi2}">
@@ -121,6 +123,7 @@ $(function(){
  $("#Calcular2").click(FCalculo_termino);
  
 });
+
 </script>
 </body>
 </html>

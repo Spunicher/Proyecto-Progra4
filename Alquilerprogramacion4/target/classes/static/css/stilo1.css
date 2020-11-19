@@ -5,7 +5,7 @@ body{
 }
 .encabezado{
     align-items: center;
-    background-color: #214252;
+    background-color: #e0ad21;
     text-align: center;
     color: white;
     
@@ -24,7 +24,7 @@ body{
 
 .funciones li a{
     text-decoration: none;
-    color: white;
+    color: rgb(0, 0, 0);
     padding: 20px;
      display: block;
 }
@@ -36,7 +36,7 @@ body{
 }
 
 .funciones li a:hover{
-    background-color: orange;
+    background-color: #d1cdcd;
 
 }
 
@@ -55,8 +55,8 @@ img{
 }
 
 footer{
-    background-color: #214252;
-    color:white;
+    background-color: #e0ad21;
+    color:black;
     text-align: center;   
     margin-top:50px;
 }
